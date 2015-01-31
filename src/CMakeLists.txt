@@ -28,6 +28,7 @@ target_link_libraries (generate ${GCRYPT_LIBRARIES})
 set (gnome-connect
 	gnome-connect.c
 	json-message.c
+	network.c
 )
 add_executable (gnome-connect ${gnome-connect})
 target_link_libraries (gnome-connect ${JSON_LIBRARIES})
