@@ -1,6 +1,6 @@
 #include <gcrypt.h>
 
-#define SAFE(call)                                              \
+#define SAFE( call)                                              \
 {                                                               \
     int err = call;                                             \
     if (err)                                                    \
