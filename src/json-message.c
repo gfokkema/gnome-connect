@@ -1,42 +1,42 @@
-#include <json-glib/json-glib.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include "gnome-connect.h"
 
-#include "json-message.h"
-
-JsonMessage*
-json_message_new (char* msg)
+char*
+json_message_create_identity ()
 {
-    JsonParser* parser;
-    JsonReader* reader;
+    JsonBuilder *builder;
+    JsonNode *root;
+    JsonGenerator *generator;
 
-    parser = json_parser_new();
-    GError *err;
-    if (!json_parser_load_from_data (parser, msg, strlen(msg), &err))
-    {
-        fprintf(stderr, "Error in file '%s' in line %i: %s.\n",
-                __FILE__, __LINE__, err->message);
-                exit(EXIT_FAILURE);
-    }
+    builder = json_builder_new ();
+    json_builder_begin_object (builder);
+    json_builder_set_member_name  (builder, "type");
+    json_builder_add_string_value (builder, GCONN_MESSAGE_STRING_IDENTITY);
+    json_builder_set_member_name  (builder, "id");
+    json_builder_add_int_value    (builder, g_get_real_time ());
+    json_builder_set_member_name  (builder, "body");
+        json_builder_begin_object     (builder);
+        json_builder_set_member_name  (builder, "protocolVersion");
+        json_builder_add_int_value    (builder, 5);
+        json_builder_set_member_name  (builder, "deviceName");
+        json_builder_add_string_value (builder, "arch-laptop");
+        json_builder_set_member_name  (builder, "deviceType");
+        json_builder_add_string_value (builder, "desktop");
+        json_builder_set_member_name  (builder, "deviceId");
+        json_builder_add_string_value (builder, "debug");
+        json_builder_end_object       (builder);
+    json_builder_end_object       (builder);
 
-    reader = json_reader_new (json_parser_get_root (parser));
+    generator = json_generator_new ();
+    root = json_builder_get_root (builder);
+    json_generator_set_root (generator, root);
 
-    json_reader_read_member (reader, "type");
-    const char *type = json_reader_get_string_value (reader);
-    json_reader_end_member (reader);
+    gsize size;
+    char* json = json_generator_to_data (generator, &size);
+    g_strlcat (json, "\n", size + 2);
 
-    json_reader_read_member (reader, "id");
-    const long id = json_reader_get_int_value(reader);
-    json_reader_end_member (reader);
+    json_node_free (root);
+    g_object_unref (generator);
+    g_object_unref (builder);
 
-    JsonMessage* jsonmsg = malloc(sizeof(JsonMessage));
-    jsonmsg->id = id;
-    jsonmsg->type = malloc((strlen(type) + 1) * sizeof(char));
-    strncpy(jsonmsg->type, type, strlen(type));
-
-    g_object_unref(reader);
-    g_object_unref(parser);
-
-    return jsonmsg;
+    return json;
 }

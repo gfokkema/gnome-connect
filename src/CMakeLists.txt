@@ -16,6 +16,8 @@ set (main
 	notify.c
 )
 
+add_subdirectory (json)
+
 add_executable (hello ${main})
 target_link_libraries (hello ${NOTIFY_LIBRARIES})
 
@@ -28,7 +30,7 @@ target_link_libraries (generate ${GCRYPT_LIBRARIES})
 set (gnome-connect
 	gnome-connect.c
 	json-message.c
-	network.c
+	network-listener.c
 )
 add_executable (gnome-connect ${gnome-connect})
-target_link_libraries (gnome-connect ${JSON_LIBRARIES})
+target_link_libraries (gnome-connect json)

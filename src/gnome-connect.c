@@ -1,19 +1,34 @@
-#include <glib.h>
+#include "gnome-connect.h"
+
 #include <stdio.h>
 
-#include "network.h"
+GconnMsgFactory *msgfactory = NULL;
 
 void
-networkcb(char* msg)
+networkcb (NetworkListener *server,
+           GInetAddress *inet_addr,
+           char* msg)
 {
-    printf("%s\n", msg);
+    GconnMessage* json = gconn_msg_factory_message(msgfactory, msg);
+    printf("id: %ld msg: %s\n", json->id, json->type);
+
+//    network_listener_udp_connect (server);
+//    network_listener_udp_send    (server, inet_addr, 1714, json_message_create_identity ());
+//    network_listener_tcp_connect(server, inet_addr, json->tcpport);
+//    network_listener_tcp_send(server, json_message_create_identity ());
+
+//    free (json);
 }
 
 int
 main()
 {
-    NetworkListener *server = network_listener_new(1714);
-    network_listener_udp_listen(server, &networkcb);
+    msgfactory = g_object_new (GCONN_TYPE_MSG_FACTORY, 0);
+
+    NetworkListener *server = network_listener_new (1714);
+    while (TRUE)
+        network_listener_udp_listen (server, &networkcb);
+    network_listener_delete (server);
 
     return 0;
 }

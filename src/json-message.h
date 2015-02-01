@@ -1,12 +1,8 @@
 #ifndef JSON_MESSAGE_H_
 #define JSON_MESSAGE_H_
 
-typedef struct JsonMessage
-{
-    long    id;
-    char*   type;
-} JsonMessage;
+#include <json-glib/json-glib.h>
 
-JsonMessage*    json_message_new (char *msg);
+char*            json_message_create_identity ();
 
-#endif
+#endif // JSON_MESSAGE_H_
