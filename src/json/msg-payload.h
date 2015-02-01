@@ -24,6 +24,7 @@ struct _GconnMsgPayloadClass
     GObjectClass parent;
 };
 
-GType       gconn_msg_payload_get_type (void);
+GType            gconn_msg_payload_get_type (void);
+GconnMsgPayload* gconn_msg_payload_new      (void);
 
 #endif // GCONN_MSG_PAYLOAD_H_

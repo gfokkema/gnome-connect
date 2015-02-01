@@ -1,13 +1,7 @@
 #ifndef GCONN_MSG_FACTORY_H_
 #define GCONN_MSG_FACTORY_H_
 
-#include <glib-object.h>
-#include <json-glib/json-glib.h>
-
 #include "message.h"
-#include "msg-identity.h"
-#include "msg-pair.h"
-#include "msg-payload.h"
 
 typedef struct _GconnMsgFactory        GconnMsgFactory;
 typedef struct _GconnMsgFactoryClass   GconnMsgFactoryClass;

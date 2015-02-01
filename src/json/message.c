@@ -1,4 +1,4 @@
-#include "message.h"
+#include "../gnome-connect.h"
 
 G_DEFINE_TYPE (GconnMessage, gconn_message, G_TYPE_OBJECT)
 

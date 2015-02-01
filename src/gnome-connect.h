@@ -16,5 +16,8 @@
 #include "json-message.h"
 #include "network-listener.h"
 #include "json/factory.h"
+#include "json/msg-identity.h"
+#include "json/msg-pair.h"
+#include "json/msg-payload.h"
 
 #endif // GNOME_CONNECT_H_
