@@ -88,6 +88,23 @@ network_listener_tcp_send (NetworkListener *server,
 }
 
 void
+network_listener_tcp_listen (NetworkListener *server)
+{
+    GSocketAddress *sock_addr;
+    GInetAddress *inet_addr;
+    char buffer[2048];
+    int size;
+
+    SAFE( size = g_socket_receive_from (server->tcp_socket,
+                                        &sock_addr,
+                                        buffer,
+                                        sizeof(buffer),
+                                        NULL,
+                                        &error) );
+    printf("msg: %s\n", buffer);
+}
+
+void
 network_listener_udp_connect (NetworkListener *server)
 {
     SAFE( server->udp_client_socket = g_socket_new (G_SOCKET_FAMILY_IPV4,

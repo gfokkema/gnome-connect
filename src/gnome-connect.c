@@ -12,10 +12,9 @@ networkcb (NetworkListener *server,
     GconnMessage* json = gconn_msg_factory_message(msgfactory, msg);
     printf("id: %ld msg: %s\n", json->id, json->type);
 
-//    network_listener_udp_connect (server);
-//    network_listener_udp_send    (server, inet_addr, 1714, json_message_create_identity ());
-    network_listener_tcp_connect(server, inet_addr, GCONN_MSG_IDENTITY(json->payload)->tcpport);
-    network_listener_tcp_send(server, json_message_create_identity ());
+    network_listener_tcp_connect (server, inet_addr, GCONN_MSG_IDENTITY(json->payload)->tcpport);
+    network_listener_tcp_send    (server, json_message_create_identity ());
+    network_listener_tcp_listen  (server, server->tcp_client_socket);
 
     g_object_unref (json);
 }
