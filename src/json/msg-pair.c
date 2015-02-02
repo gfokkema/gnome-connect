@@ -1,6 +1,6 @@
 #include "../gnome-connect.h"
 
-G_DEFINE_TYPE (GconnMsgPair, gconn_msg_pair, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GconnMsgPair, gconn_msg_pair, GCONN_TYPE_MSG_PAYLOAD)
 
 static void
 gconn_msg_pair_class_init (GconnMsgPairClass *klass)

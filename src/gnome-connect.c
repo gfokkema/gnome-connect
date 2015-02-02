@@ -14,10 +14,10 @@ networkcb (NetworkListener *server,
 
 //    network_listener_udp_connect (server);
 //    network_listener_udp_send    (server, inet_addr, 1714, json_message_create_identity ());
-//    network_listener_tcp_connect(server, inet_addr, json->tcpport);
-//    network_listener_tcp_send(server, json_message_create_identity ());
+    network_listener_tcp_connect(server, inet_addr, GCONN_MSG_IDENTITY(json->payload)->tcpport);
+    network_listener_tcp_send(server, json_message_create_identity ());
 
-//    free (json);
+    g_object_unref (json);
 }
 
 int

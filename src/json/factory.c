@@ -40,6 +40,7 @@ gconn_msg_factory_message (GconnMsgFactory *self,
     jsonmsg->id = json_object_get_int_member (object, "id");
     jsonmsg->type = g_strndup(type, strlen(type));
 
+    printf("%s\n", type);
     if (strncmp (GCONN_MESSAGE_STRING_IDENTITY, type, strlen(type)) == 0)
     {
         jsonmsg->payload = GCONN_MSG_PAYLOAD (gconn_msg_identity_new (body));
