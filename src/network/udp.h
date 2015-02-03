@@ -1,7 +1,8 @@
 #ifndef GCONN_UDP_H_
 #define GCONN_UDP_H_
 
-#include "network.h"
+#include <glib-object.h>
+#include <gio/gio.h>
 
 typedef struct _GconnUdp        GconnUdp;
 typedef struct _GconnUdpClass   GconnUdpClass;
@@ -26,6 +27,5 @@ struct _GconnUdpClass
 };
 
 GType       gconn_udp_get_type (void);
-GconnUdp*   gconn_udp_new      (void);
 
 #endif // GCONN_UDP_H_

@@ -13,11 +13,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "json-message.h"
 #include "json/factory.h"
 #include "json/msg-identity.h"
 #include "json/msg-pair.h"
 #include "json/msg-payload.h"
+#include "network/network.h"
 #include "network/udp.h"
 #include "network/tcp.h"
 

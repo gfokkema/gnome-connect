@@ -7,7 +7,7 @@ G_DEFINE_TYPE_WITH_CODE (GconnTcp, gconn_tcp, G_TYPE_OBJECT,
                                                 gconn_network_interface_init))
 
 static void
-gconn_tcp_debug (GconnNetwork *self)
+gconn_tcp_listen (GconnNetwork *self, gint port)
 {
     g_print("Implementation from Tcp class\n");
 }
@@ -15,7 +15,7 @@ gconn_tcp_debug (GconnNetwork *self)
 static void
 gconn_network_interface_init (GconnNetworkInterface *self)
 {
-    self->debug = gconn_tcp_debug;
+    self->listen = gconn_tcp_listen;
 }
 
 static void

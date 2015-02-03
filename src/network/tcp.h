@@ -1,7 +1,8 @@
 #ifndef GCONN_TCP_H_
 #define GCONN_TCP_H_
 
-#include "network.h"
+#include <glib-object.h>
+#include <gio/gio.h>
 
 typedef struct _GconnTcp        GconnTcp;
 typedef struct _GconnTcpClass   GconnTcpClass;
@@ -26,6 +27,5 @@ struct _GconnTcpClass
 };
 
 GType       gconn_tcp_get_type (void);
-GconnTcp*   gconn_tcp_new      (void);
 
 #endif // GCONN_TCP_H_

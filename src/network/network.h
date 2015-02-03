@@ -16,10 +16,12 @@ struct _GconnNetworkInterface
 {
     GTypeInterface parent;
 
-    void (*debug)  (GconnNetwork *self);
+    void (*bind)   (GconnNetwork *self, gint port);
+    void (*listen) (GconnNetwork *self);
 };
 
 GType         gconn_network_get_type (void);
-void          gconn_network_debug    (GconnNetwork *self);
+void          gconn_network_bind     (GconnNetwork *self, gint port);
+void          gconn_network_listen   (GconnNetwork *self);
 
 #endif // GCONN_NETWORK_H_
