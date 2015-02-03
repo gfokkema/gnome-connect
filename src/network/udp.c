@@ -7,6 +7,13 @@ G_DEFINE_TYPE_WITH_CODE (GconnUdp, gconn_udp, G_TYPE_OBJECT,
                                                 gconn_network_interface_init))
 
 static void
+gconn_udp_dispose (GObject *gobject)
+{
+    GconnUdp *self = GCONN_UDP (gobject);
+    g_clear_object (&self->socket);
+}
+
+static void
 gconn_udp_bind (GconnUdp *self, gint port)
 {
     g_print("Implementation from Udp class\n");
@@ -50,11 +57,12 @@ gconn_network_interface_init (GconnNetworkInterface *self)
 static void
 gconn_udp_init (GconnUdp *self)
 {
-    self = GCONN_UDP (self);
 }
 
 static void
 gconn_udp_class_init (GconnUdpClass *self)
 {
-    self = GCONN_UDP_CLASS (self);
+    GObjectClass *gobject_class = G_OBJECT_CLASS (self);
+
+    gobject_class->dispose = gconn_udp_dispose;
 }

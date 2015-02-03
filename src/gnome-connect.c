@@ -16,5 +16,7 @@ main()
     GCONN_NETWORK_GET_INTERFACE (udp_server)->listen(udp_server);
 //    GCONN_NETWORK_GET_INTERFACE (tcp_server)->listen(tcp_server, 1714);
 
+    g_object_unref (udp_server);
+
     return 0;
 }
