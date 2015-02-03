@@ -23,6 +23,8 @@ json_message_create_identity ()
         json_builder_add_string_value (builder, "desktop");
         json_builder_set_member_name  (builder, "deviceId");
         json_builder_add_string_value (builder, "debug");
+        json_builder_set_member_name  (builder, "tcpPort");
+        json_builder_add_int_value    (builder, 8080);
         json_builder_end_object       (builder);
     json_builder_end_object       (builder);
 
