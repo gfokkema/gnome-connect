@@ -16,7 +16,7 @@ Gconn::MsgPair::MsgPair(char* publickey, bool pair)
 
 Gconn::MsgPair::~MsgPair()
 {
-    g_free(this->publickey);
+    g_free (this->publickey);
 }
 
 JsonNode*

@@ -11,10 +11,10 @@ public:
     MsgIdentity  (int protocol, char* devicename, char* devicetype, char* deviceID, int tcpport);
     ~MsgIdentity ();
 
-    JsonNode* json();
+    JsonNode* json ();
 
-    int protocol;
-    int tcpport;
+    int   protocol;
+    int   tcpport;
     char* devicename;
     char* devicetype;
     char* deviceID;

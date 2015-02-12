@@ -25,9 +25,9 @@ Gconn::MsgIdentity::MsgIdentity(int protocol,
 
 Gconn::MsgIdentity::~MsgIdentity()
 {
-    g_free(this->devicename);
-    g_free(this->devicetype);
-    g_free(this->deviceID);
+    g_free (this->devicename);
+    g_free (this->devicetype);
+    g_free (this->deviceID);
 }
 
 JsonNode*
@@ -36,7 +36,7 @@ Gconn::MsgIdentity::json()
     JsonBuilder *builder;
     JsonNode *root;
 
-    builder = json_builder_new ();
+    builder = json_builder_new    ();
     json_builder_begin_object     (builder);
     json_builder_set_member_name  (builder, "protocolVersion");
     json_builder_add_int_value    (builder, protocol);

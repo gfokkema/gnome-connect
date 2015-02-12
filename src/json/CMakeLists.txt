@@ -1,5 +1,6 @@
 set (json
 	factory.cpp
+	message.cpp
 	msg-identity.cpp
 	msg-pair.cpp
 )

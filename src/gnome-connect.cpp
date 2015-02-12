@@ -7,9 +7,17 @@ Gconn::Network* tcp_server = NULL;
 void
 client_connected(Glib::RefPtr<Gio::InetAddress> inet_addr, gchar* text)
 {
-    Gconn::Message* msg = msgfactory->message(text);
-    std::cout << msg->json() << std::endl;
-    tcp_server->send(inet_addr, ((Gconn::MsgIdentity*)msg->payload)->tcpport, msg->json());
+    Gconn::Message* msg;
+    char* json;
+
+    msg  = msgfactory->message(text);
+    json = msg->json();
+
+    std::cout << "echo: " << json << std::endl;
+    tcp_server->send(inet_addr, ((Gconn::MsgIdentity*)msg->payload)->tcpport, json);
+
+    free   (json);
+    delete (msg);
 }
 
 int
@@ -25,8 +33,8 @@ main(int argc, gchar** argv)
     udp_server->bind(1714);
     udp_server->listen();
 
-    free (udp_server);
-//    free (tcp_server);
+    delete (udp_server);
+    delete (tcp_server);
 
     return 0;
 }
