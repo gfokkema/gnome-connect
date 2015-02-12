@@ -9,14 +9,13 @@
         g_error (error->message);                               \
 }
 
-
-#include <stdlib.h>
-#include <string.h>
+#include <giomm.h>
+#include <gtkmm.h>
+#include <iostream>
 
 #include "json/factory.h"
 #include "json/msg-identity.h"
 #include "json/msg-pair.h"
-#include "json/msg-payload.h"
 #include "network/network.h"
 #include "network/udp.h"
 #include "network/tcp.h"

@@ -1,6 +1,6 @@
 #include "notify.h"
 
-void main () {
+int main () {
     Notify* android_notify = new_notify();
     notify();
     destroy_notify();

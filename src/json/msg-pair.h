@@ -1,33 +1,22 @@
 #ifndef GCONN_MSG_PAIR_H_
 #define GCONN_MSG_PAIR_H_
 
-#include "msg-payload.h"
+#include "message.h"
 
-typedef struct _GconnMsgPair        GconnMsgPair;
-typedef struct _GconnMsgPairClass   GconnMsgPairClass;
+namespace Gconn {
 
-#define GCONN_TYPE_MSG_PAIR                  (gconn_msg_pair_get_type ())
-#define GCONN_MSG_PAIR(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GCONN_TYPE_MSG_PAIR, GconnMsgPair))
-#define GCONN_MSG_PAIR_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass),  GCONN_TYPE_MSG_PAIR, GconnMsgPairClass))
-#define GCONN_MSG_PAIR_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj),  GCONN_TYPE_MSG_PAIR, GconnMsgPairClass))
-#define GCONN_IS_MSG_PAIR(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GCONN_TYPE_MSG_PAIR))
-#define GCONN_IS_MSG_PAIR_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass),  GCONN_TYPE_MSG_PAIR))
+class MsgPair : public MsgPayload {
+public:
+    MsgPair  (JsonNode* data);
+    MsgPair  (char* publickey, bool pair);
+    ~MsgPair ();
 
-struct _GconnMsgPair
-{
-    GconnMsgPayload parent;
+    JsonNode* json();
 
-    gchar *publickey;
-    gboolean pair;
+    char* publickey;
+    bool pair;
 };
 
-struct _GconnMsgPairClass
-{
-    GconnMsgPayloadClass parent;
-};
-
-GType         gconn_msg_pair_get_type (void);
-GconnMsgPair* gconn_msg_pair_new      (JsonNode *data);
-
+}
 
 #endif // GCONN_MSG_PAIR_H_

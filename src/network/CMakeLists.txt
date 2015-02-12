@@ -1,6 +1,5 @@
 set (network
-	network.c
-	tcp.c
-	udp.c
+	tcp.cpp
+	udp.cpp
 )
 add_library (network ${network})

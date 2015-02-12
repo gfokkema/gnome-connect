@@ -24,7 +24,7 @@ sexpressioninfo (const gcry_sexp_t *key)
 {
     int size = gcry_sexp_sprint(*key, GCRYSEXP_FMT_ADVANCED, NULL, 0);
 
-    char* buffer = malloc(size);
+    char* buffer = (char*)malloc(size);
     gcry_sexp_sprint (*key, GCRYSEXP_FMT_ADVANCED, buffer, size);
 
     printf("%s\n", buffer);
@@ -78,17 +78,17 @@ int main()
     SAFE( gcry_control (GCRYCTL_INITIALIZATION_FINISHED, 0) );
     gcry_set_progress_handler (&progress, NULL);
 
-    gcry_sexp_t private, public;
-    generate(&private, &public);
+    gcry_sexp_t privatekey, publickey;
+    generate(&privatekey, &publickey);
 
-    sexpressioninfo(&public);
-    sexpressioninfo(&private);
+    sexpressioninfo(&publickey);
+    sexpressioninfo(&privatekey);
 
     gcry_sexp_t cipher;
-    encrypt(&cipher, &public, "test");
+    encrypt(&cipher, &publickey, "test");
     sexpressioninfo(&cipher);
 
     gcry_sexp_t plain;
-    decrypt(&plain, &private, &cipher);
+    decrypt(&plain, &privatekey, &cipher);
     sexpressioninfo(&plain);
 }

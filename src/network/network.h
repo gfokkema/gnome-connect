@@ -1,27 +1,18 @@
 #ifndef GCONN_NETWORK_H_
 #define GCONN_NETWORK_H_
 
-#include <glib-object.h>
-#include <gio/gio.h>
+#include <giomm.h>
+#include <gtkmm.h>
 
-typedef struct _GconnNetwork          GconnNetwork;
-typedef struct _GconnNetworkInterface GconnNetworkInterface;
+namespace Gconn {
+    class Network {
+    public:
+        virtual void bind   (gint port) = 0;
+        virtual void listen () = 0;
+        virtual void send   (Glib::RefPtr<Gio::InetAddress> sock_addr, gint port, gchar* msg) = 0;
 
-#define GCONN_TYPE_NETWORK                  (gconn_network_get_type ())
-#define GCONN_NETWORK(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj),   GCONN_TYPE_NETWORK, GconnNetwork))
-#define GCONN_IS_NETWORK(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj),   GCONN_TYPE_NETWORK))
-#define GCONN_NETWORK_GET_INTERFACE(obj)    (G_TYPE_INSTANCE_GET_INTERFACE((obj), GCONN_TYPE_NETWORK, GconnNetworkInterface))
-
-struct _GconnNetworkInterface
-{
-    GTypeInterface parent;
-
-    void (*bind)   (GconnNetwork *self, gint port);
-    void (*listen) (GconnNetwork *self);
+        sigc::signal<void, Glib::RefPtr<Gio::InetAddress>, gchar*> signal_connected;
+    };
 };
-
-GType         gconn_network_get_type (void);
-void          gconn_network_bind     (GconnNetwork *self, gint port);
-void          gconn_network_listen   (GconnNetwork *self);
 
 #endif // GCONN_NETWORK_H_

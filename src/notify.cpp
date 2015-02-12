@@ -7,7 +7,7 @@ Notify* new_notify()
 {
     notify_init ("Hello world!");
 
-    Notify* notify = malloc(sizeof(Notify));
+    Notify* notify = (Notify*)malloc(sizeof(Notify));
     if (!notify)
     {
         exit(EXIT_FAILURE);

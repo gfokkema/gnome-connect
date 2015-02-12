@@ -1,31 +1,22 @@
 #ifndef GCONN_UDP_H_
 #define GCONN_UDP_H_
 
-#include <glib-object.h>
-#include <gio/gio.h>
+#include "network.h"
 
-typedef struct _GconnUdp        GconnUdp;
-typedef struct _GconnUdpClass   GconnUdpClass;
+namespace Gconn {
 
-#define GCONN_TYPE_UDP                  (gconn_udp_get_type ())
-#define GCONN_UDP(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GCONN_TYPE_UDP, GconnUdp))
-#define GCONN_UDP_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass),  GCONN_TYPE_UDP, GconnUdpClass))
-#define GCONN_UDP_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj),  GCONN_TYPE_UDP, GconnUdpClass))
-#define GCONN_IS_UDP(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GCONN_TYPE_UDP))
-#define GCONN_IS_UDP_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass),  GCONN_TYPE_UDP))
+class Udp : public Network {
+public:
+    Udp();
+    ~Udp();
 
-struct _GconnUdp
-{
-    GObject parent;
-
-    GSocket *socket;
+    void bind(gint port);
+    void listen();
+    void send(Glib::RefPtr<Gio::InetAddress> sock_addr, gint port, gchar* msg);
+private:
+    Glib::RefPtr<Gio::Socket> socket;
 };
 
-struct _GconnUdpClass
-{
-    GObjectClass parent;
-};
-
-GType       gconn_udp_get_type (void);
+}
 
 #endif // GCONN_UDP_H_
