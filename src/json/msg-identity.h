@@ -7,17 +7,17 @@ namespace Gconn {
 
 class MsgIdentity : public MsgPayload {
 public:
-    MsgIdentity  (JsonNode* data);
-    MsgIdentity  (int protocol, char* devicename, char* devicetype, char* deviceID, int tcpport);
+    MsgIdentity  (Json::Value data);
+    MsgIdentity  (int protocol, std::string devicename, std::string devicetype, std::string deviceID, int tcpport);
     ~MsgIdentity ();
 
-    JsonNode* json ();
+    Json::Value json ();
 
     int   protocol;
     int   tcpport;
-    char* devicename;
-    char* devicetype;
-    char* deviceID;
+    std::string devicename;
+    std::string devicetype;
+    std::string deviceID;
 };
 
 }

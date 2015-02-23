@@ -12,7 +12,10 @@
 #include <giomm.h>
 #include <gtkmm.h>
 #include <iostream>
+#include <string>
+#include <vector>
 
+#include "device.h"
 #include "json/factory.h"
 #include "json/msg-identity.h"
 #include "json/msg-pair.h"

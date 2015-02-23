@@ -5,4 +5,4 @@ set (json
 	msg-pair.cpp
 )
 add_library (json ${json})
-target_link_libraries (json ${JSON_LIBRARIES})
+target_link_libraries (json ${JSONCPP_LIBRARIES})

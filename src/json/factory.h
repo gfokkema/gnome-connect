@@ -10,7 +10,8 @@ public:
     MsgFactory();
     ~MsgFactory();
 
-    Gconn::Message* message(gchar* msg);
+    Gconn::Message* message(std::string msg);
+    std::string     json(Message* msg);
 };
 
 }

@@ -1,29 +1,29 @@
 #ifndef GCONN_MESSAGE_H_
 #define GCONN_MESSAGE_H_
 
-#include <json-glib/json-glib.h>
+#include <json/json.h>
+#include <string>
 
-#define GCONN_MESSAGE_STRING_IDENTITY "kdeconnect.identity"
-#define GCONN_MESSAGE_STRING_PAIR     "kdeconnect.pair"
+static const std::string GCONN_MESSAGE_STRING_IDENTITY = "kdeconnect.identity";
+static const std::string GCONN_MESSAGE_STRING_PAIR = "kdeconnect.pair";
 
 namespace Gconn {
 
 class MsgPayload {
 public:
     virtual ~MsgPayload() = 0;
-    virtual JsonNode* json() = 0;
+    virtual Json::Value json() = 0;
 };
 inline MsgPayload::~MsgPayload() {};
 
 class Message {
 public:
-    Message  (JsonNode* data);
-    Message  (int id, char* type, MsgPayload* payload);
+    Message  (unsigned long id, std::string type, MsgPayload* payload);
     ~Message ();
 
-    char* json ();
+    Json::Value json ();
 
-    char*  type;
+    std::string   type;
     unsigned long id;
     MsgPayload*   payload;
 };

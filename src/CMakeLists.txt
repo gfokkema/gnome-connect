@@ -4,13 +4,15 @@ project (gnome-connect++)
 
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/../modules" ${CMAKE_MODULE_PATH})
 
+add_definitions(-std=gnu++0x)
+
 find_package (GCrypt REQUIRED)
 find_package (PkgConfig REQUIRED)
 pkg_check_modules (GTKMM  REQUIRED gtkmm-3.0)
-pkg_check_modules (JSON   REQUIRED json-glib-1.0)
+pkg_check_modules (JSONCPP REQUIRED jsoncpp)
 pkg_check_modules (NOTIFY REQUIRED libnotify)
 
-include_directories (${GCRYPT_INCLUDE_DIRS} ${GTKMM_INCLUDE_DIRS} ${JSON_INCLUDE_DIRS} ${NOTIFY_INCLUDE_DIRS})
+include_directories (${GCRYPT_INCLUDE_DIRS} ${GTKMM_INCLUDE_DIRS} ${JSONCPP_INCLUDE_DIRS} ${NOTIFY_INCLUDE_DIRS})
 
 set (main
 	hello.cpp
@@ -30,6 +32,7 @@ add_executable (generate ${generate})
 target_link_libraries (generate ${GCRYPT_LIBRARIES})
 
 set (gnome-connect
+	device.cpp
 	gnome-connect.cpp
 )
 add_executable (gnome-connect ${gnome-connect})

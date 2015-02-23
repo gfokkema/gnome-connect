@@ -7,13 +7,13 @@ namespace Gconn {
 
 class MsgPair : public MsgPayload {
 public:
-    MsgPair  (JsonNode* data);
-    MsgPair  (char* publickey, bool pair);
+    MsgPair  (Json::Value data);
+    MsgPair  (std::string publickey, bool pair);
     ~MsgPair ();
 
-    JsonNode* json();
+    Json::Value json();
 
-    char* publickey;
+    std::string publickey;
     bool pair;
 };
 

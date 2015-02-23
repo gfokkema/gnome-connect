@@ -12,7 +12,7 @@ public:
 
     void bind(gint port);
     void listen();
-    void send(Glib::RefPtr<Gio::InetAddress> sock_addr, gint port, gchar* msg);
+//    void send(Glib::RefPtr<Gio::InetAddress> sock_addr, gint port, std::string msg);
 private:
     Glib::RefPtr<Gio::Socket> socket;
 };
